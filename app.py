@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-
+import panda as pd
 # Load trained model
 model = pickle.load(open("model.pkl", "rb"))
 
@@ -9,8 +9,9 @@ st.title("🍽️ AI Restaurant Inventory Forecasting")
 day = st.number_input("Enter Day Number", min_value=1)
 
 if st.button("Predict Sales"):
-    prediction = model.predict([[day]])
+   import pandas as pd
 
+prediction = model.predict(pd.DataFrame([[day]], columns=["Day"]))
     st.success(f"Predicted Sales: {prediction[0]:.2f}")
 
     tomatoes = prediction[0] * 0.1
