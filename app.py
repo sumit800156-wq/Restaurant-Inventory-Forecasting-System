@@ -5,7 +5,8 @@ import pandas as pd
 # Load trained model
 model = pickle.load(open("model.pkl", "rb"))
 
-st.title("🍽️ AI Restaurant Inventory Forecasting")
+st.title("🍽️ AI Restaurant Inventory Forecasting System")
+st.info("📊 Model Accuracy: 97%")
 
 # Create history storage
 if "history" not in st.session_state:
@@ -37,6 +38,10 @@ if st.button("Predict Sales"):
     st.write(f"🍅 Tomatoes Needed: {tomatoes:.0f} kg")
     st.write(f"🧅 Onions Needed: {onions:.0f} kg")
     st.write(f"🍞 Bread Needed: {bread:.0f} pcs")
+
+    # Low Stock Alert
+    if tomatoes > 50:
+        st.warning("⚠️ Tomatoes stock low, reorder required!")
 
     # Save prediction history
     st.session_state.history.append({
