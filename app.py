@@ -2,15 +2,22 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-# Load trained model
 model = pickle.load(open("model.pkl", "rb"))
 
 st.title("🍽 AI Restaurant Inventory Forecasting")
 
 day = st.number_input("Enter Day Number", min_value=1)
+temperature = st.number_input("Enter Temperature", value=30)
+weekend = st.selectbox("Weekend", [0, 1])
 
 if st.button("Predict Sales"):
-    prediction = model.predict(pd.DataFrame([[day]], columns=["Day"]))
+
+    input_data = pd.DataFrame(
+        [[day, temperature, weekend]],
+        columns=["Day", "Temperature", "Weekend"]
+    )
+
+    prediction = model.predict(input_data)
 
     st.success(f"Predicted Sales: {prediction[0]:.2f}")
 
