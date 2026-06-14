@@ -58,3 +58,11 @@ if st.session_state.history:
     st.line_chart(
         history_df.set_index("Day")["Predicted Sales"]
     )
+csv = history_df.to_csv(index=False)
+
+st.download_button(
+    label="📥 Download Prediction History",
+    data=csv,
+    file_name="prediction_history.csv",
+    mime="text/csv"
+)
