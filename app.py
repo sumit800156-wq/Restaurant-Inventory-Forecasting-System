@@ -39,3 +39,9 @@ if st.button("Predict Sales"):
 if st.session_state.history:
     history_df = pd.DataFrame(st.session_state.history)
     st.dataframe(history_df)
+# Sales Trend Graph
+st.subheader("Sales Trend")
+
+st.line_chart(
+    history_df.set_index("Day")["Predicted Sales"]
+)
